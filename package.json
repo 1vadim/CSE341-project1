@@ -1,0 +1,25 @@
+{
+  "name": "cse341-project1",
+  "version": "1.0.0",
+  "description": "My first CSE341 project",
+  "homepage": "https://github.com/1vadim/CSE341-project1#readme",
+  "bugs": {
+    "url": "https://github.com/1vadim/CSE341-project1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1vadim/CSE341-project1.git"
+  },
+  "license": "ISC",
+  "author": "Vadym Chemariev",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.4.0"
+  }
+}
