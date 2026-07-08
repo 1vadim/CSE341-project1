@@ -6,3 +6,33 @@ GET {{baseUrl}}/contacts
 ###
 
 GET {{baseUrl}}/contacts/6a4b83747e45bb9195315c79
+
+###
+
+POST {{baseUrl}}/contacts/
+Content-Type: application/json
+
+{
+  "firstName": "John1",
+  "lastName": "Doe1",
+  "email": "john.doe1@example.com",
+  "favoriteColor": "Blue1",
+  "birthday": "1995-05-15"
+}
+
+###
+
+PUT {{baseUrl}}/contacts/6a4e9d6f5d2f56c44e810b32
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1995-05-15"
+}
+
+###
+
+DELETE {{baseUrl}}/contacts/6a4e9d6f5d2f56c44e810b32

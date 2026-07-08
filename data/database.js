@@ -13,7 +13,6 @@ const initDb = async () => {
     console.log("Database is already initialized!");
     return database;
   }
-
   try {
     await client.connect();
     if (!process.env.MONGODB_DB_NAME) {
