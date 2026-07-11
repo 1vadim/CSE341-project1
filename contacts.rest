@@ -5,7 +5,7 @@ GET {{baseUrl}}/contacts
 
 ###
 
-GET {{baseUrl}}/contacts/6a4b83747e45bb9195315c79
+GET {{baseUrl}}/contacts/6a527ee43a37c617074f68a9
 
 ###
 
@@ -22,15 +22,14 @@ Content-Type: application/json
 
 ###
 
-PUT {{baseUrl}}/contacts/6a4e9d6f5d2f56c44e810b32
+PUT {{baseUrl}}/contacts/6a527ee43a37c617074f68a9
 Content-Type: application/json
 
 {
-  "firstName": "John",
-  "lastName": "Smith",
-  "email": "john.smith@example.com",
-  "favoriteColor": "Green",
-  "birthday": "1995-05-15"
+   "lastName": "Watson2",
+  "email": "emily1.w@example.com",
+  "favoriteColor": "purple",
+  "birthday": "1998-03-30"
 }
 
 ###

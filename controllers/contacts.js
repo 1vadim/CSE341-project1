@@ -36,22 +36,49 @@ const createSingle = async (req, res) => {
 
 const updateSingle = async (req, res) => {
   // #swagger.tags = ['Contacts']
+//   const userId = req.params.id;
+//   const updateData = {
+//     firstName: req.body.firstName,
+//     lastName: req.body.lastName,
+//     email: req.body.email,
+//     favoriteColor: req.body.favoriteColor,
+//     birthday: req.body.birthday
+//   };
+//   const result = await mongodb
+//     .getDatabase()
+//     .collection('contacts')
+//     .updateOne({ _id: new ObjectId(userId) }, { $set: updateData });
+//   if (result.modifiedCount > 0) {
+//     res.status(204).send();
+//   } else {
+//     res.status(500).json(result.error || 'Some error occurred while updating the contact.');
+//   }
+// };
+
   const userId = req.params.id;
-  const updateData = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
-  };
-  const result = await mongodb
-    .getDatabase()
-    .collection('contacts')
-    .updateOne({ _id: new ObjectId(userId) }, { $set: updateData });
-  if (result.modifiedCount > 0) {
-    res.status(204).send();
-  } else {
-    res.status(500).json(result.error || 'Some error occurred while updating the contact.');
+  const updateData = {};
+  for (const [key, value] of Object.entries(req.body)) {
+    if (value !== undefined) {
+      updateData[key] = value;
+    }
+  }
+  if (Object.keys(updateData).length === 0) {
+    return res.status(400).json({ message: 'No data provided for update.' });
+  }
+
+  try {
+    const result = await mongodb
+      .getDatabase()
+      .collection('contacts')
+      .updateOne({ _id: new ObjectId(userId) }, { $set: updateData });
+
+    if (result.matchedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(404).json({ message: 'Contact not found.' });
+    }
+  } catch (error) {
+    res.status(500).json(error.message || 'Some error occurred while updating the contact.');
   }
 };
 
