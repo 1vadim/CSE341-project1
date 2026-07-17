@@ -5,7 +5,7 @@ GET {{baseUrl}}/contacts
 
 ###
 
-GET {{baseUrl}}/contacts/6a527ee43a37c617074f68a9
+GET {{baseUrl}}/contacts/6a57e32663045c825358e01a
 
 ###
 
@@ -22,11 +22,12 @@ Content-Type: application/json
 
 ###
 
-PUT {{baseUrl}}/contacts/6a527ee43a37c617074f68a9
+PUT {{baseUrl}}/contacts/6a57e32663045c825358e01a
 Content-Type: application/json
 
 {
-   "lastName": "Watson2",
+  "firstName": "John2",
+  "lastName": "Watson2",
   "email": "emily1.w@example.com",
   "favoriteColor": "purple",
   "birthday": "1998-03-30"
@@ -34,4 +35,4 @@ Content-Type: application/json
 
 ###
 
-DELETE {{baseUrl}}/contacts/6a4e9d6f5d2f56c44e810b32
+DELETE {{baseUrl}}/contacts/6a57e32663045c825358e01a

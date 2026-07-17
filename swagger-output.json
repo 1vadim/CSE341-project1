@@ -36,62 +36,24 @@
     },
     "/contacts/": {
       "get": {
-        "tags": [
-          "Contacts"
-        ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       },
       "post": {
-        "tags": [
-          "Contacts"
-        ],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       }
     },
     "/contacts/{id}": {
       "get": {
-        "tags": [
-          "Contacts"
-        ],
         "description": "",
         "parameters": [
           {
@@ -102,15 +64,12 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "put": {
-        "tags": [
-          "Contacts"
-        ],
         "description": "",
         "parameters": [
           {
@@ -121,24 +80,15 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
           "400": {
             "description": "Bad Request"
           },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "422": {
+            "description": "Unprocessable Entity"
           }
         }
       },
       "delete": {
-        "tags": [
-          "Contacts"
-        ],
         "description": "",
         "parameters": [
           {
@@ -149,12 +99,86 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
+          "400": {
+            "description": "Bad Request"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "John"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "email": {
+          "type": "string",
+          "example": "john.doe@example.com"
+        },
+        "favoriteColor": {
+          "type": "string",
+          "example": "Blue"
+        },
+        "birthday": {
+          "type": "string",
+          "example": "1990-01-15"
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "field"
+              },
+              "value": {
+                "type": "string",
+                "example": "not-an-email"
+              },
+              "msg": {
+                "type": "string",
+                "example": "Please provide a valid email address."
+              },
+              "path": {
+                "type": "string",
+                "example": "email"
+              },
+              "location": {
+                "type": "string",
+                "example": "body"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GeneralError": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "error"
+        },
+        "statusCode": {
+          "type": "number",
+          "example": 404
+        },
+        "message": {
+          "type": "string",
+          "example": "Contact with the specified ID was not found."
         }
       }
     }

@@ -5,7 +5,10 @@ const port = process.env.PORT || 3000;
 
 const mongodb = require('./data/database');
 
+const { globalErrorHandler } = require('./middleware/errorHandler');
+
 app.use(bodyParser.json());
+app.use(globalErrorHandler);
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
@@ -17,17 +20,18 @@ app.use((req, res, next) => {
 });
 app.use('/', require('./routes'));
 
+process.on('uncaughtException', (err, origin) => {
+  console.error(`Caught exception: ${err}\nException origin: ${origin}`);
+  process.exit(1);
+});
 
 mongodb
   .initDb()
   .then(() => {
     app.listen(port, () => {
-      console.log(
-        `Database is listening and node server is running on http://localhost:${port}`,
-      );
+      console.log(`Database is listening and node server is running on http://localhost:${port}`);
     });
   })
   .catch((err) => {
-    console.error("Failed to initialize database:", err);
+    console.error('Failed to initialize database:', err);
   });
-

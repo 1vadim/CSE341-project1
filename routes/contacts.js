@@ -1,11 +1,22 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
+const contactsController = require('../controllers/contacts');
+const { validateId, contactValidationRules } = require('../middleware/validateContact');
+const { handleAsync } = require('../middleware/errorHandler');
 
-const usersController = require("../controllers/contacts");
+router.get('/', handleAsync(contactsController.getAll));
 
-router.get("/", usersController.getAll);
-router.get("/:id", usersController.getSingle);
-router.post("/", usersController.createSingle);
-router.put('/:id', usersController.updateSingle);
-router.delete('/:id', usersController.deleteSingle);
+router.get('/:id', validateId, handleAsync(contactsController.getSingle));
+
+router.post('/', contactValidationRules, handleAsync(contactsController.createSingle));
+
+router.put(
+  '/:id',
+  validateId,
+  contactValidationRules,
+  handleAsync(contactsController.updateSingle)
+);
+
+router.delete('/:id', validateId, handleAsync(contactsController.deleteSingle));
 
 module.exports = router;
